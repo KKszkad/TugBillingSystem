@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CostEditingPrompt</class>
+ <widget class="QWidget" name="CostEditingPrompt">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>计费操作</string>
+  </property>
+  <widget class="QTableWidget" name="costTable">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>20</y>
+     <width>401</width>
+     <height>231</height>
+    </rect>
+   </property>
+   <column>
+    <property name="text">
+     <string>工作内容</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>工作代号</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>所需拖轮数</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>费用</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>实际费用</string>
+    </property>
+   </column>
+  </widget>
+  <widget class="QPushButton" name="confirm">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>260</y>
+     <width>80</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>确认</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="cancel">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>260</y>
+     <width>80</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>取消</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
