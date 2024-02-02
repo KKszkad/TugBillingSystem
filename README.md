@@ -39,7 +39,7 @@ The system consists of three user roles:
 
 The diagram below illustrates the ideal process flow of the system.
 
-![image-20240202190224809](E:\Programs\Qt\TugBillingSystem\assets\image-20240202190224809.png)
+![image-20240202190224809](.\assets\image-20240202190224809.png)
 
 **NOTE:** Each application is sequentially handled by one user role at a time based on its status. Both the Audit Clerk and Ship Agency have the ability to deny expenses edited by Billing Clerks, triggering a reevaluation of the checking process.
 
@@ -70,7 +70,7 @@ After you login as 张三, the Ship Agency, you can click **Application** to get
 
 
 
-![image-20240202214959247](E:\Programs\Qt\TugBillingSystem\assets\image-20240202214959247.png)
+![image-20240202214959247](.\assets\image-20240202214959247.png)
 
 When you start a new application, you will need to enter the Chinese name of the ship. You can try to copy the ship name list below:
 
