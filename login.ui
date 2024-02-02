@@ -16,10 +16,10 @@
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>120</x>
+     <x>20</x>
      <y>10</y>
-     <width>201</width>
-     <height>21</height>
+     <width>391</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="font">
@@ -29,7 +29,7 @@
     </font>
    </property>
    <property name="text">
-    <string>欢迎使用拖轮计费系统</string>
+    <string>WELCOME TO THE TUGBILLING SYSTEM</string>
    </property>
   </widget>
   <widget class="QWidget" name="layoutWidget">
