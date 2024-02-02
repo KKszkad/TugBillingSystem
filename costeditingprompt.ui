@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>572</width>
+    <height>317</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,60 +18,60 @@
     <rect>
      <x>0</x>
      <y>20</y>
-     <width>401</width>
-     <height>231</height>
+     <width>571</width>
+     <height>241</height>
     </rect>
    </property>
    <column>
     <property name="text">
-     <string>工作内容</string>
+     <string>Work Name</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>工作代号</string>
+     <string>Code</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>所需拖轮数</string>
+     <string>Tugboat Needed</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>费用</string>
+     <string>Expense</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>实际费用</string>
+     <string>Actual Expense</string>
     </property>
    </column>
   </widget>
   <widget class="QPushButton" name="confirm">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>260</y>
-     <width>80</width>
-     <height>24</height>
+     <x>90</x>
+     <y>270</y>
+     <width>81</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
-    <string>确认</string>
+    <string>Confirm</string>
    </property>
   </widget>
   <widget class="QPushButton" name="cancel">
    <property name="geometry">
     <rect>
-     <x>280</x>
-     <y>260</y>
-     <width>80</width>
-     <height>24</height>
+     <x>370</x>
+     <y>270</y>
+     <width>81</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
-    <string>取消</string>
+    <string>Cancel</string>
    </property>
   </widget>
  </widget>

@@ -26,32 +26,13 @@
     <string>确认</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>0</y>
+     <y>20</y>
      <width>271</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>16</pointsize>
-     <bold>false</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>请在下方填入服务器的IP地址</string>
-   </property>
-  </widget>
-  <widget class="QWidget" name="">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>50</y>
-     <width>251</width>
-     <height>51</height>
+     <height>61</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">

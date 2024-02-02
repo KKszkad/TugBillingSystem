@@ -7,9 +7,10 @@ NetWorkSetting::NetWorkSetting(QWidget *parent) :
     ui(new Ui::NetWorkSetting)
 {
     ui->setupUi(this);
-    QString status = "当前的服务器地址为：" + netWorkIpAddress;
-    ui->netWorkStatus->setText(status);
+    ui->netWorkStatus->setText("默认远程服务器地址为:106.54.213.38\n在下方填入新地址");
     ui->netWorkStatus->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    ui->ipAddress->setText(netWorkIpAddress);
+    ui->ipAddress->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 }
 
 NetWorkSetting::~NetWorkSetting()

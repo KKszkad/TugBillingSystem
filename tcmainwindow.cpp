@@ -57,7 +57,7 @@ TCMainWindow::~TCMainWindow()
 void TCMainWindow::initCashierTable()
 {
     //初始化欢迎语
-    ui->welcomeSign0->setText("欢迎 计费员" + userName);
+    ui->welcomeSign0->setText("Welcome BC" + userName);
     ui->cashierTable->resizeColumnsToContents();
 
     //初始化表格
@@ -81,7 +81,7 @@ void TCMainWindow::initCashierTable()
         if(item) {
             int row = item->row();
             QString status = ui->cashierTable->item(row, 5)->text();
-            if (status == "需要计费"){
+            if (status == "BC Editing Required"){
                 //检查整行的所有单元格 只要有内容
                 bool rowHasContent = false;
                 for (int col = 0; col < ui->cashierTable->columnCount(); ++col) {
@@ -108,8 +108,8 @@ inline void TCMainWindow::cashierRequest()
     HttpClient("http://" + netWorkIpAddress + ":8095/apply_list").success([=](const QString &response) {
                                                          QJsonObject responseInfo = Format::QStringToJson(response);
                                                          showBillsInfo(responseInfo);
-                                                         ui->totalPage0->setText(QString("总页数：%1").arg(totalPage));
-                                                         ui->currentPage0->setText(QString("当前页数：%1").arg(currentPage));
+                                                         ui->totalPage0->setText(QString("Total：%1").arg(totalPage));
+                                                         ui->currentPage0->setText(QString("Current Page：%1").arg(currentPage));
                                                      }).json(Format::JsonToQString(sendInfo)).post();
 }
 
@@ -141,7 +141,7 @@ inline void TCMainWindow::showBillsInfo(QJsonObject &billObj)
         QString status_str = Format::getOrderStatus(dataObject["auditstate"].toString(), dataObject["checkstate"].toString(), dataObject["isrespagree"].toString());
         QTableWidgetItem *status = new QTableWidgetItem(status_str);
 
-        if (status_str == "需要计费") {
+        if (status_str == "BC Editing Required") {
             status->setBackground(Qt::red);
         }
 
@@ -157,7 +157,7 @@ inline void TCMainWindow::showBillsInfo(QJsonObject &billObj)
 
 void TCMainWindow::initAuditorTable()
 {  
-    ui->welcomeSign1->setText("欢迎 复核员" + userName);
+    ui->welcomeSign1->setText("Welcome AC" + userName);
 
 
     QHeaderView *header = ui->auditorTable->horizontalHeader();
@@ -188,7 +188,7 @@ void TCMainWindow::initAuditorTable()
 
             int row = item->row();
             QString status = ui->auditorTable->item(row, 6)->text();
-            if (status == "需要复核" || status == "船代已同意"){
+            if (status == "AC Approval Required" || status == "SA Approved"){
                 //TODO 这里是否说明复核员的prompt窗口在初始化时根据这个status也作出反应
 
                 //检查整行的所有单元格 只要有内容
@@ -219,8 +219,8 @@ void TCMainWindow::auditorRequest()
     HttpClient("http://" + netWorkIpAddress + ":8095/apply_list").success([=](const QString &response) {
                                                          QJsonObject responseInfo = Format::QStringToJson(response);
                                                          showChecksInfo(responseInfo);
-                                                         ui->totalPage1->setText(QString("总页数：%1").arg(totalPage));
-                                                         ui->currentPage1->setText(QString("当前页数：%1").arg(currentPage));
+                                                         ui->totalPage1->setText(QString("Total:%1").arg(totalPage));
+                                                         ui->currentPage1->setText(QString("Current Page:%1").arg(currentPage));
                                                      }).json(Format::JsonToQString(sendInfo)).post();
 }
 
@@ -260,10 +260,10 @@ void TCMainWindow::showChecksInfo(QJsonObject &checkObj)
         QTableWidgetItem *status = new QTableWidgetItem(status_str);
 
         //TODO 在这里添加背景色
-        if (status_str == "船代已同意") {
+        if (status_str == "SA Approved") {
             // 设置背景颜色为黄色
             status->setBackground(Qt::yellow);
-        } else if (status_str == "需要复核") {
+        } else if (status_str == "AC Approval Required") {
             // 设置背景颜色为红色
             status->setBackground(Qt::red);
         }

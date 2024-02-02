@@ -11,6 +11,7 @@
 #include <QStandardItemModel>
 #include <QJsonArray>
 #include <QMessageBox>
+#include <QRegularExpression>
 
 SAMainWindow::SAMainWindow(const QString& userName, QWidget *parent) :
     QMainWindow(parent),
@@ -32,6 +33,8 @@ SAMainWindow::SAMainWindow(const QString& userName, QWidget *parent) :
     timer->start(750);
 
     initOrdersTable();
+
+    ui->zhName->setPlaceholderText("Enter the Chinese name of the ship");
 
 }
 
@@ -71,22 +74,31 @@ void SAMainWindow::on_confirmWorks_clicked() {
     for (int row = 0; row < ui->workInfo->rowCount(); ++row) {
         // 获取相应行的数据
         QString mKey = ui->workInfo->item(row, 4)->text();
-        QString tugBoatCount = ui->workInfo->item(row, 5)->text();
+//        QString tugBoatCount = ui->workInfo->item(row, 5)->text();
+        QString tugBoatCount = dynamic_cast<QLineEdit*>(ui->workInfo->cellWidget(row, 5))->text();
         bool confirmWorkChecked = ui->workInfo->item(row, 6)->checkState() == Qt::Checked;
 
         // 检查条件并输出
         if (!tugBoatCount.isEmpty() && confirmWorkChecked) {
-//            qDebug() << "Valid Data in Row" << row << ": mKey =" << mKey << ", tugBoatCount =" << tugBoatCountValue;
-            WorkDetail workDetail = WorkDetail(mKey.toInt(), tugBoatCount.toInt());
-            application.workDetails.append(workDetail);
+            // 使用正则表达式检查是否为正整数
+            QRegularExpression regExp("^[1-9]\\d*$");  // 匹配以1-9开头的一个或多个数字
+
+            if (regExp.match(tugBoatCount).hasMatch()) {
+                WorkDetail workDetail = WorkDetail(mKey.toInt(), tugBoatCount.toInt());
+                application.workDetails.append(workDetail);
+            } else {
+                QMessageBox::about(this, "Warning", "the tugboatCount must be int!");
+                return;
+            }
+
         }
     }
 
+    if (application.workDetails.isEmpty()){
+        QMessageBox::about(this, "Warning", "Should choose at least one work!");
+        return;
+    }
     ui->procedure->setCurrentIndex(1);
-//    HttpClient("http://" + netWorkIpAddress + ":8095/get_Area").success([=](const QString &response) {
-//                                                    QJsonObject responseInfo = Format::QStringToJson(response);
-//                                                    showPorts(responseInfo);
-//                                                     }).post();
     showPorts();
 
 }
@@ -124,8 +136,8 @@ void SAMainWindow::on_submitApplication_clicked() {
                                                      if (responseInfo["code"].toInt() == 200) {
                                                          // 创建信息框
                                                          // 这种信息框可以阻塞主窗口 并且不会导致其关闭
-//                                                         messageBox.setMessage("拖轮申请成功");
-                                                         QMessageBox::about(this, "提示", "拖轮申请成功");
+//                                                         messageBox.setMessage("Successfully submit the application!");
+                                                         QMessageBox::about(this, "Tip", "Successfully submit the application!");
 
                                                      } else {
                                                          // 创建信息框
@@ -134,14 +146,24 @@ void SAMainWindow::on_submitApplication_clicked() {
                                                      ui->procedure->setCurrentIndex(2);
                                                      // WARNNING 新改动 刷新数据
                                                      agencyRequest();
-                                                 }).json(Format::JsonToQString(sendInfo)).post();
+                                                                }).json(Format::JsonToQString(sendInfo)).post();
+}
+
+void SAMainWindow::on_lastSection0_clicked()
+{
+    ui->procedure->setCurrentIndex(2);
+}
+
+void SAMainWindow::on_lastSection1_clicked()
+{
+    ui->procedure->setCurrentIndex(0);
 }
 
 //将传回的船舶信息显示在shipInfo中 如没有此船则显示查无此船
 void SAMainWindow::showShipInfo(QJsonObject &responseObject) {
     int code = responseObject["code"].toInt();
     if (code == 400) {
-        ui->shipInfo->setText("查无此船");
+        ui->shipInfo->setText("No such ship.");
         ui->confirmShip->setEnabled(false);
         return;
     }
@@ -181,8 +203,15 @@ void SAMainWindow::showWorkInfo(QJsonObject &workInfo){
         QTableWidgetItem *chargeStandard = new QTableWidgetItem(dataObject["chargestandard"].toString());
         QTableWidgetItem *abbreviation = new QTableWidgetItem(dataObject["abbr"].toString());
         QTableWidgetItem *mKey = new QTableWidgetItem(QString::number(dataObject["mkey"].toInt()));
-        QTableWidgetItem *tugBoatCount = new QTableWidgetItem();
+        QLineEdit *tugBoatCount = new QLineEdit();
         QTableWidgetItem *confirmWork = new QTableWidgetItem();
+
+        operationName->setFlags(operationName->flags() & ~Qt::ItemIsEditable);
+        operationType->setFlags(operationType->flags() & ~Qt::ItemIsEditable);
+        chargeStandard->setFlags(chargeStandard->flags() & ~Qt::ItemIsEditable);
+        abbreviation->setFlags(abbreviation->flags() & ~Qt::ItemIsEditable);
+        mKey->setFlags(mKey->flags() & ~Qt::ItemIsEditable);
+        confirmWork->setFlags(confirmWork->flags() & ~Qt::ItemIsEditable);
 
         confirmWork->setCheckState(Qt::Unchecked);
         ui->workInfo->setItem(row, 0, operationName);
@@ -190,7 +219,7 @@ void SAMainWindow::showWorkInfo(QJsonObject &workInfo){
         ui->workInfo->setItem(row, 2, chargeStandard);
         ui->workInfo->setItem(row, 3, abbreviation);
         ui->workInfo->setItem(row, 4, mKey);
-        ui->workInfo->setItem(row, 5, tugBoatCount);
+        ui->workInfo->setCellWidget(row, 5, tugBoatCount);
         ui->workInfo->setItem(row, 6, confirmWork);
     }
 }
@@ -246,12 +275,11 @@ void SAMainWindow::initOrdersTable()
     });
 
     //这里设置双击事件
-    //即弹出窗口使计费员可以更改费用
     connect(ui->ordersTable, &QTableWidget::itemDoubleClicked, [&](QTableWidgetItem *item){
         if(item) {
             int row = item->row();
             QString status = ui->ordersTable->item(row, 5)->text();
-            if (status == "需要船代同意"){
+            if (status == "SA Approval Required"){
                 //检查整行的所有单元格 只要有内容
                 bool rowHasContent = false;
                 for (int col = 0; col < ui->ordersTable->columnCount(); ++col) {
@@ -283,8 +311,8 @@ void SAMainWindow::agencyRequest()
     HttpClient("http://" + netWorkIpAddress + ":8095/applicant_apply_list").success([=](const QString &response) {
                                                          QJsonObject responseInfo = Format::QStringToJson(response);
                                                          showOrdersTable(responseInfo);
-                                                         ui->totalPage->setText(QString("总页数：%1").arg(totalPage));
-                                                         ui->currentPage->setText(QString("当前页数：%1").arg(currentPage));
+                                                         ui->totalPage->setText(QString("Total:%1").arg(totalPage));
+                                                         ui->currentPage->setText(QString("Current Page:%1").arg(currentPage));
                                                      }).json(Format::JsonToQString(sendInfo)).post();
 }
 
@@ -320,7 +348,7 @@ void SAMainWindow::showOrdersTable(QJsonObject &orderObj)
 
 
         //TODO 在这里添加背景色
-        if (status_str == "需要船代同意") {
+        if (status_str == "SA Approval Required") {
             // 设置背景颜色为红色
             status->setBackground(Qt::red);
         }

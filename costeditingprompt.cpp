@@ -12,7 +12,7 @@ CostEditingPrompt::CostEditingPrompt(const QString& userName, const QString& app
     QWidget(parent),
     ui(new Ui::CostEditingPrompt)
 {
-    setFixedSize(400, 300);
+    setFixedSize(572, 317);
     setWindowFlags(Qt::Window);
     ui->setupUi(this);
     this->applyId = applyId;
@@ -63,14 +63,21 @@ void CostEditingPrompt::showCostInfo(QJsonObject &responseInfo)
         QTableWidgetItem *tugNumber	 = new QTableWidgetItem(QString::number(dataObject["tugnumber"].toInt()));
         QTableWidgetItem *defaultCost = new QTableWidgetItem(QString::number(dataObject["cost"].toInt()));
 //        QLineEdit *actualCost = new QLineEdit();
-        QTableWidgetItem *actualCost = new QTableWidgetItem();
+//        QTableWidgetItem *actualCost = new QTableWidgetItem();
+        QLineEdit *actualCost = new QLineEdit();
+
+        operationName->setFlags(operationName->flags() & ~Qt::ItemIsEditable);
+        mKey->setFlags(mKey->flags() & ~Qt::ItemIsEditable);
+        tugNumber->setFlags(tugNumber->flags() & ~Qt::ItemIsEditable);
+        defaultCost->setFlags(defaultCost->flags() & ~Qt::ItemIsEditable);
 
         ui->costTable->setItem(row, 0, operationName);
         ui->costTable->setItem(row, 1, mKey);
         ui->costTable->setItem(row, 2, tugNumber);
         ui->costTable->setItem(row, 3, defaultCost);
 //        ui->costTable->setCellWidget(row, 4, actualCost);
-        ui->costTable->setItem(row, 4, actualCost);
+//        ui->costTable->setItem(row, 4, actualCost);
+        ui->costTable->setCellWidget(row, 4, actualCost);
     }
 }
 
@@ -96,13 +103,25 @@ void CostEditingPrompt::on_confirm_clicked()
     for (int row = 0; row < ui->costTable->rowCount(); ++row) {
         // 获取对应行的数据
         QString mKey = ui->costTable->item(row, 1)->text();
-        QString cost = ui->costTable->item(row, 4)->text();
+//        QString cost = ui->costTable->item(row, 4)->text();
+        // TODO 重要
+        QString cost = dynamic_cast<QLineEdit*>(ui->costTable->cellWidget(row, 4))->text();
+
         if (cost.isEmpty()){
             cost = ui->costTable->item(row, 3)->text();
         }
-        QJsonObject obj;
-        obj[mKey] = cost.toInt();
-        aaArray.append(obj);
+
+        QRegularExpression regExp("^[1-9]\\d*$");  // 匹配以1-9开头的一个或多个数字
+
+        if (regExp.match(cost).hasMatch()) {
+            QJsonObject obj;
+            obj[mKey] = cost.toInt();
+            aaArray.append(obj);
+        } else {
+            QMessageBox::about(this, "WARNING", "The actualcost must be int!");
+            return;
+        }
+
     }
     sendInfo["aa"] = aaArray;
 
@@ -116,7 +135,7 @@ void CostEditingPrompt::on_confirm_clicked()
                                                         // 创建信息框
                                                         // 这种信息框可以阻塞主窗口 并且不会导致其关闭
 
-                                                        QMessageBox::about(this, "提示", "修改申请成功");
+                                                        QMessageBox::about(this, "Tip", "Editing espense submited!");
 
                                                     } else {
                                                         // 创建信息框

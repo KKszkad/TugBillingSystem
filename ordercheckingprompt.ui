@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>450</width>
+    <height>327</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,36 +18,36 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>401</width>
-     <height>251</height>
+     <width>451</width>
+     <height>281</height>
     </rect>
    </property>
    <column>
     <property name="text">
-     <string>工作内容</string>
+     <string>Work Name</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>工作代号</string>
+     <string>Code</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>所需拖轮数</string>
+     <string>Tugboat Needed</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>设定费用</string>
+     <string>Edited Expense</string>
     </property>
    </column>
   </widget>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>260</y>
+     <x>50</x>
+     <y>290</y>
      <width>340</width>
      <height>26</height>
     </rect>
@@ -56,28 +56,28 @@
     <item>
      <widget class="QPushButton" name="confirm">
       <property name="text">
-       <string>通过</string>
+       <string>Approve</string>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QPushButton" name="deny">
       <property name="text">
-       <string>不予通过</string>
+       <string>Deny</string>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QPushButton" name="getCheck">
       <property name="text">
-       <string>生成支票</string>
+       <string>Print Invoice</string>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QPushButton" name="cancel">
       <property name="text">
-       <string>取消</string>
+       <string>Cancel</string>
       </property>
      </widget>
     </item>

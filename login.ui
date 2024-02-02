@@ -37,7 +37,7 @@
     <rect>
      <x>70</x>
      <y>40</y>
-     <width>281</width>
+     <width>283</width>
      <height>114</height>
     </rect>
    </property>
@@ -45,21 +45,21 @@
     <item row="1" column="0">
      <widget class="QLabel" name="label_2">
       <property name="text">
-       <string>密码：</string>
+       <string>Password:</string>
       </property>
      </widget>
     </item>
     <item row="3" column="1" colspan="2">
      <widget class="QPushButton" name="login">
       <property name="text">
-       <string>登录</string>
+       <string>Login</string>
       </property>
      </widget>
     </item>
     <item row="2" column="0">
      <widget class="QLabel" name="label_3">
       <property name="text">
-       <string>用户身份：</string>
+       <string>User Type:</string>
       </property>
      </widget>
     </item>
@@ -73,14 +73,14 @@
     <item row="2" column="2">
      <widget class="QRadioButton" name="userType1">
       <property name="text">
-       <string>船代</string>
+       <string>Ship Agency</string>
       </property>
      </widget>
     </item>
     <item row="0" column="0">
      <widget class="QLabel" name="label">
       <property name="text">
-       <string>用户名：</string>
+       <string>User Name:</string>
       </property>
      </widget>
     </item>
@@ -90,18 +90,18 @@
     <item row="2" column="1">
      <widget class="QRadioButton" name="userType0">
       <property name="text">
-       <string>拖轮公司</string>
+       <string>Tug Company</string>
       </property>
      </widget>
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>300</x>
      <y>160</y>
-     <width>117</width>
+     <width>122</width>
      <height>25</height>
     </rect>
    </property>
@@ -109,7 +109,7 @@
     <item>
      <widget class="QLabel" name="label_5">
       <property name="text">
-       <string>更改服务器ip：</string>
+       <string>Change Server:</string>
       </property>
      </widget>
     </item>

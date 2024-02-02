@@ -31,7 +31,7 @@ OrderCheckingPrompt::OrderCheckingPrompt(const QString& userName, const QString&
     ui(new Ui::OrderCheckingPrompt)
 {
     setWindowFlags(Qt::Window);
-    setFixedSize(400, 300);
+    setFixedSize(450, 327);
     ui->setupUi(this);
     this->applyId = applyId;
     this->userName = userName;
@@ -50,6 +50,7 @@ void OrderCheckingPrompt::initiate()
     QHeaderView *header = ui->costTable->horizontalHeader();
     header->setSectionResizeMode(QHeaderView::Stretch);
 
+    ui->costTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
     QJsonObject sendInfo;
     sendInfo["pageSize"] = 99;
@@ -59,7 +60,7 @@ void OrderCheckingPrompt::initiate()
     conditionObject["applyid"] = applyId;
     sendInfo["condition"] = conditionObject;
 
-    if(status == "需要复核") {
+    if(status == "AC Approval Required") {
         ui->getCheck->setEnabled(false);
     } else {
         ui->confirm->setEnabled(false);
@@ -205,7 +206,7 @@ void OrderCheckingPrompt::on_confirm_clicked()
                                                  // 创建信息框
                                                  // 这种信息框可以阻塞主窗口 并且不会导致其关闭
 
-                                                 QMessageBox::about(this, "提示", "审核成功");
+                                                 QMessageBox::about(this, "Tip", "Edited expense approved!");
 
                                              } else {
                                                  // 创建信息框
@@ -235,7 +236,7 @@ void OrderCheckingPrompt::on_deny_clicked()
                                                                                             // 创建信息框
                                                                                             // 这种信息框可以阻塞主窗口 并且不会导致其关闭
 
-                                                                                            QMessageBox::about(this, "提示", "审核成功");
+                                                                                            QMessageBox::about(this, "Tip", "Edited expense denied!");
 
                                                                                         } else {
                                                                                             // 创建信息框
@@ -258,18 +259,6 @@ void OrderCheckingPrompt::on_getCheck_clicked()
                                      sendInfo["tugapplyid"] = applyId;
                                      HttpClient("http://" + netWorkIpAddress + ":8095/get_piaoju").success([=](const QString &response) {
                                                                                         QJsonObject responseInfo = Format::QStringToJson(response);
-//                                                                                            if (responseInfo["code"].toInt() == 200) {
-//                                                                                            // 创建信息框
-//                                                                                            // 这种信息框可以阻塞主窗口 并且不会导致其关闭
-
-//                                                                                            QMessageBox::about(this, "提示", "审核成功");
-
-//                                                                                        } else {
-//                                                                                            // 创建信息框
-//                                                                                            QMessageBox::about(this, "提示", "审核失败");
-//                                                                                        }
-//                                                                                        //TODO 在此之前应当涉及一个数据的更新使得主窗口重新发送信息请求
-//                                                                                        //
                                                                                         produceExcelFile(responseInfo);
                                                                                         //释放窗口资源
                                                                                         close();

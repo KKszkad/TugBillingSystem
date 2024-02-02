@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>船代客户端</string>
+   <string>Ship Agency Client</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTabWidget" name="tabWidget">
@@ -24,11 +24,11 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="sendApplication">
      <attribute name="title">
-      <string>拖轮申请</string>
+      <string>Application</string>
      </attribute>
      <widget class="QStackedWidget" name="procedure">
       <property name="geometry">
@@ -47,9 +47,9 @@
         <property name="geometry">
          <rect>
           <x>40</x>
-          <y>20</y>
-          <width>871</width>
-          <height>461</height>
+          <y>40</y>
+          <width>851</width>
+          <height>441</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -57,22 +57,22 @@
           <widget class="QTableWidget" name="workInfo">
            <column>
             <property name="text">
-             <string>工作名称</string>
+             <string>Work Name</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string>操作类型</string>
+             <string>Work Type</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string>收费标准</string>
+             <string>Standard</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string>工作简称</string>
+             <string>Abbreviation</string>
             </property>
             <property name="font">
              <font>
@@ -82,27 +82,38 @@
            </column>
            <column>
             <property name="text">
-             <string>操作代号</string>
+             <string>Code</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string>工作拖轮数量</string>
+             <string>Tugboat needed</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string>是否选择</string>
+             <string>Select</string>
             </property>
            </column>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="confirmWorks">
-           <property name="text">
-            <string>确认工作内容</string>
-           </property>
-          </widget>
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item>
+            <widget class="QPushButton" name="lastSection0">
+             <property name="text">
+              <string>Back</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="confirmWorks">
+             <property name="text">
+              <string>Next</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
         </layout>
        </widget>
@@ -111,12 +122,17 @@
          <rect>
           <x>40</x>
           <y>0</y>
-          <width>631</width>
-          <height>21</height>
+          <width>701</width>
+          <height>41</height>
          </rect>
         </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
         <property name="text">
-         <string>选择作业</string>
+         <string>Choose Works : select the work and enter its corresponding number of Tugboats you need</string>
         </property>
        </widget>
       </widget>
@@ -146,32 +162,104 @@
              </property>
             </spacer>
            </item>
-           <item row="6" column="0">
-            <widget class="QLabel" name="label_5">
-             <property name="text">
-              <string>结束</string>
-             </property>
-            </widget>
-           </item>
            <item row="0" column="2">
             <widget class="QComboBox" name="selectPort"/>
-           </item>
-           <item row="8" column="0">
-            <widget class="QLabel" name="label_6">
-             <property name="text">
-              <string>联系电话</string>
-             </property>
-            </widget>
            </item>
            <item row="4" column="2">
             <widget class="QDateTimeEdit" name="startTime"/>
            </item>
+           <item row="1" column="2">
+            <spacer name="verticalSpacer">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="6" column="2">
+            <widget class="QDateTimeEdit" name="endTime"/>
+           </item>
+           <item row="3" column="2">
+            <spacer name="verticalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="6" column="0">
+            <widget class="QLabel" name="label_5">
+             <property name="text">
+              <string>End Time</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="0">
+            <widget class="QLabel" name="label_6">
+             <property name="text">
+              <string>Phone</string>
+             </property>
+            </widget>
+           </item>
            <item row="4" column="0">
             <widget class="QLabel" name="label_4">
              <property name="text">
-              <string>开始</string>
+              <string>Start Time</string>
              </property>
             </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_3">
+             <property name="text">
+              <string>Type</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="2">
+            <widget class="QLineEdit" name="shipTel"/>
+           </item>
+           <item row="9" column="2">
+            <spacer name="verticalSpacer_5">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="0" column="0" colspan="2">
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>Port</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="2">
+            <spacer name="verticalSpacer_4">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
            </item>
            <item row="2" column="2">
             <widget class="QComboBox" name="business">
@@ -187,96 +275,35 @@
              </item>
             </widget>
            </item>
-           <item row="8" column="2">
-            <widget class="QLineEdit" name="shipTel"/>
-           </item>
-           <item row="6" column="2">
-            <widget class="QDateTimeEdit" name="endTime"/>
-           </item>
-           <item row="1" column="2">
-            <spacer name="verticalSpacer">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="7" column="2">
-            <spacer name="verticalSpacer_4">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="label_3">
-             <property name="text">
-              <string>选择类型</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="0" colspan="2">
-            <widget class="QLabel" name="label">
-             <property name="text">
-              <string>选择港口</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="2">
-            <spacer name="verticalSpacer_2">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="9" column="2">
-            <spacer name="verticalSpacer_5">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
+           <item row="10" column="2">
+            <layout class="QHBoxLayout" name="horizontalLayout_4">
+             <item>
+              <widget class="QPushButton" name="lastSection1">
+               <property name="text">
+                <string>Back</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="submitApplication">
+               <property name="text">
+                <string>Submit</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
           </layout>
-         </item>
-         <item>
-          <widget class="QPushButton" name="submitApplication">
-           <property name="text">
-            <string>提交作业请求</string>
-           </property>
-          </widget>
          </item>
         </layout>
        </widget>
        <widget class="QLabel" name="label_8">
         <property name="geometry">
          <rect>
-          <x>400</x>
+          <x>380</x>
           <y>20</y>
-          <width>161</width>
-          <height>31</height>
+          <width>201</width>
+          <height>21</height>
          </rect>
         </property>
         <property name="font">
@@ -286,7 +313,7 @@
          </font>
         </property>
         <property name="text">
-         <string>其他细节信息</string>
+         <string>Other Details</string>
         </property>
        </widget>
       </widget>
@@ -306,7 +333,7 @@
            <item>
             <widget class="QLabel" name="label_2">
              <property name="text">
-              <string>查询船只信息：</string>
+              <string>Check vessel information:</string>
              </property>
             </widget>
            </item>
@@ -316,7 +343,7 @@
            <item>
             <widget class="QPushButton" name="findShip">
              <property name="text">
-              <string>查询</string>
+              <string>Check</string>
              </property>
             </widget>
            </item>
@@ -328,7 +355,7 @@
          <item>
           <widget class="QPushButton" name="confirmShip">
            <property name="text">
-            <string>确认船只</string>
+            <string>Next</string>
            </property>
           </widget>
          </item>
@@ -339,7 +366,7 @@
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
-      <string>我的订单</string>
+      <string>Table</string>
      </attribute>
      <widget class="QTableWidget" name="ordersTable">
       <property name="geometry">
@@ -352,32 +379,32 @@
       </property>
       <column>
        <property name="text">
-        <string>申请ID</string>
+        <string>Application ID</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>船名（中文）</string>
+        <string>Boat Name</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>申请日期</string>
+        <string>Submission Time</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>计费员</string>
+        <string>Billing Clerk</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>复核员</string>
+        <string>Audit Clerk</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>申请状态</string>
+        <string>Status</string>
        </property>
       </column>
      </widget>
@@ -394,7 +421,7 @@
        <item>
         <widget class="QPushButton" name="lastPage">
          <property name="text">
-          <string>上一页</string>
+          <string>Previous Page</string>
          </property>
         </widget>
        </item>
@@ -408,7 +435,7 @@
        <item>
         <widget class="QPushButton" name="nextPage">
          <property name="text">
-          <string>下一页</string>
+          <string>Next Page</string>
          </property>
         </widget>
        </item>
@@ -436,7 +463,7 @@
        </font>
       </property>
       <property name="text">
-       <string>退出登录</string>
+       <string>Logout</string>
       </property>
      </widget>
     </widget>

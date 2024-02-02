@@ -58,6 +58,9 @@ public slots:
     void on_confirmWorks_clicked();
     void on_submitApplication_clicked();
 
+    void on_lastSection0_clicked();
+    void on_lastSection1_clicked();
+
     // 船代的数据显示部分按钮按下的触发事件
     void on_lastPage_clicked();
     void on_nextPage_clicked();

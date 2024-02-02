@@ -24,17 +24,17 @@
    </property>
    <column>
     <property name="text">
-     <string>操作名</string>
+     <string>Work Name</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>拖轮数量</string>
+     <string>Tugboat Needed</string>
     </property>
    </column>
    <column>
     <property name="text">
-     <string>费用</string>
+     <string>Quotation</string>
     </property>
    </column>
   </widget>
@@ -51,21 +51,21 @@
     <item>
      <widget class="QPushButton" name="agree">
       <property name="text">
-       <string>同意</string>
+       <string>Approve</string>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QPushButton" name="disagree">
       <property name="text">
-       <string>不同意</string>
+       <string>Deny</string>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QPushButton" name="cancel">
       <property name="text">
-       <string>取消</string>
+       <string>Cancel</string>
       </property>
      </widget>
     </item>

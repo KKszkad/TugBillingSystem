@@ -24,7 +24,6 @@ Login::Login(QWidget *parent)
     buttonGroup->addButton(ui->userType1);
     // 连接槽函数，确保在同一时间只有一个按钮被选中
     connect(buttonGroup, SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(onRadioButtonClicked(QAbstractButton*)));
-
 }
 
 Login::~Login()
@@ -44,7 +43,10 @@ void Login::on_login_clicked() {
     HttpClient("http://" + netWorkIpAddress + ":8095/login").success([=](const QString &response) {
                                                     QJsonObject responseInfo = Format::QStringToJson(response);
                                                     loginCheck(responseInfo);
-                                             }).json(Format::JsonToQString(sendInfo)).post();
+                                                            }).fail([=](const QString &response, int status){
+            QString fault = "INFO：\n" + response + "\nStatus：\n" + QString::number(status) + "\nCurrent Server：\n" + netWorkIpAddress;
+            QMessageBox::about(this, "Network Error", fault);
+        }).json(Format::JsonToQString(sendInfo)).post();
 }
 
 void Login::on_netWorkSetting_clicked()
@@ -54,10 +56,10 @@ void Login::on_netWorkSetting_clicked()
 }
 
 void Login::onRadioButtonClicked(QAbstractButton *button) {
-    if (button->text() == "拖轮公司") {
+    if (button->text() == "Tug Company") {
         // 在这里可以执行与 RadioButton 1 相关的操作，给出值 0
         userType = 1;
-    } else if (button->text() == "船代") {
+    } else if (button->text() == "Ship Agency") {
         // 在这里可以执行与 RadioButton 2 相关的操作，给出值 1
         userType = 0;
     }
@@ -67,8 +69,12 @@ void Login::loginCheck(QJsonObject &responseObj){
 
     int code = responseObj["code"].toInt();
 
+    if (ui->userName_line->text().isEmpty() || ui->passWord_line->text().isEmpty()) {
+        QMessageBox::about(this, "Warning", "Incomplete User Name or Password!");
+        return;
+    }
     if (code == 400) {
-        QMessageBox::about(this, "提示", "账号或密码错误！");
+        QMessageBox::about(this, "Warning", "Wrong User Name or Password!");
         return;
     }
     QJsonValue data = responseObj["data"];

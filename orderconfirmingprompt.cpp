@@ -32,6 +32,7 @@ void OrderConfirmingPrompt::initiate()
     QHeaderView *header = ui->costTable->horizontalHeader();
     header->setSectionResizeMode(QHeaderView::Stretch);
 
+    ui->costTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
     QJsonObject sendInfo;
     sendInfo["pageSize"] = 99;
@@ -92,7 +93,7 @@ void OrderConfirmingPrompt::on_agree_clicked()
                                                                   // 创建信息框
                                                                   // 这种信息框可以阻塞主窗口 并且不会导致其关闭
 
-                                                                  QMessageBox::about(this, "提示", "已同意订单");
+                                                                  QMessageBox::about(this, "Tip", "Quotation approved!");
 
                                                               } else {
                                                                   // 创建信息框
@@ -117,7 +118,7 @@ void OrderConfirmingPrompt::on_disagree_clicked()
                                                               if (responseInfo["code"].toInt() == 200) {
                                                                   // 创建信息框
                                                                   // 这种信息框可以阻塞主窗口 并且不会导致其关闭
-                                                                  QMessageBox::about(this, "提示", "已退回订单");
+                                                                  QMessageBox::about(this, "Tip", "Deny the quotation");
 
                                                               } else {
                                                                   // 创建信息框

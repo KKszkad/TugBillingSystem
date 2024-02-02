@@ -45,13 +45,13 @@ namespace Format {
 //                return "船代不同意";
 //        }
         if (auditState == "00")
-            return "需要计费";
+            return "BC Editing Required";
         if (checkState == "00")
-            return "需要复核";
+            return "AC Approval Required";
         if (isrespagree == "0")
-            return "需要船代同意";
+            return "SA Approval Required";
         else
-            return "船代已同意";
+            return "SA Approved";
     }
 
 }
